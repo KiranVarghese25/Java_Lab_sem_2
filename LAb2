@@ -1,1 +1,59 @@
+import java.util.Scanner;
+
+public class Lab2{
+static int n;
+static int[] input_array;
+static int[] high_freq_array;
+
+
+static void check_freq(int k){
+int[] arr = input_array; 
+int count;
+for (int i = 0; i < n; i++){
+count = 1;
+for (int j = i + 1; j < n; j++){
+if (arr[i] == arr[j]){
+count++;
+}
+}
+if (count >= k){
+high_freq_array = new int[k];
+for (int x = 0; x < k; x++){
+high_freq_array[x] = arr[i];
+}
+for (int x = 0; x < k; x++){
+for (int y = x + 1; y < k; y++){
+if (high_freq_array[y] > high_freq_array[x]){
+int temp = high_freq_array[x];
+high_freq_array[x] = high_freq_array[y];
+high_freq_array[y] = temp;
+}
+}
+}
+}
+
+
+}
+System.out.print("The nos are as follows: ");
+for (int x = 0; x < k; x++){
+System.out.print(high_freq_array[x] + " ");
+}
+}
+
+public static void main(String[] args){
+Scanner input = new Scanner(System.in);
+System.out.println("Enter the number of elements");
+n = input.nextInt();
+input_array = new int[n];
+
+System.out.println("Enter the elements");
+for (int i = 0; i < n; i++){
+input_array[i] = input.nextInt();
+}
+
+System.out.println("Enter the value of K");
+int k = input.nextInt();
+check_freq(k); 
+}
+}
 
