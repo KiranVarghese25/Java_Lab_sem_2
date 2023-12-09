@@ -1,0 +1,103 @@
+abstract class Robber{
+    //declaring the money each house 
+    int[] money={24,38,78,14,34,21};
+
+    //Method to print MScAI&ML
+    public void RobbingClass(){
+    System.out.println("MScAI&ML");
+    }
+
+    //Default method 
+    public void MachineLearning(){
+        System.out.println("I love Machine Learning !!!");
+    }
+
+    //creation of the abstract classes
+    abstract void RowHouses();
+    abstract void RoundHouses();
+    abstract void SqaureHouse();
+    abstract void MultiHouseBuilding();
+
+  
+}
+
+ class JAVAProfessionalRobber extends Robber{
+    //method to display the money 
+    void displaymoney(){
+    for(int i=0;i<money.length;i++){
+        System.out.println("The Money available in each house is as follows:- "+money[i]);
+    }
+    }
+
+    //Row houses method 
+    void RowHouses(){
+       int moneyRobbed=0;
+
+       //for the combination of first and last element 
+       int firstlastcombo=money[0]+money[money.length-1];
+       if(firstlastcombo>moneyRobbed){
+        moneyRobbed=firstlastcombo;
+       }
+       for(int i =0;i<4;i++){
+        int temp=money[i]+money[i+2];
+        if(temp>moneyRobbed){
+            moneyRobbed=temp;
+        }
+       
+       }
+       //printing the money robbed row wise
+    System.out.println("The amount robbed row wise is :- "+moneyRobbed);
+    }
+
+// Circle wise 
+void RoundHouses(){
+    int Circlerobbed=0;
+    for(int i=0;i<money.length-1;i++){
+        int temp1=money[i]+money[(i+2)%money.length];
+        if(temp1>Circlerobbed){
+            Circlerobbed=temp1;
+        }
+    }
+    System.out.println("The amount robbed(Circle):- "+Circlerobbed);
+}
+
+//Square wise
+void SqaureHouse(){
+    int SqaureRobbed=0;
+    for(int i=0;i<money.length-1;i++){
+        int temp2=money[i]+money[(i+2)%money.length];
+        if(temp2>SqaureRobbed){
+            SqaureRobbed=temp2;
+        }
+    }
+    System.out.println("The amount robbed(Sqaure):- "+SqaureRobbed);
+}
+
+//Multi typewise
+
+void MultiHouseBuilding(){
+    int Multitype=0;
+    for(int i=0;i<money.length-1;i++){
+        int temp3=money[i]+money[(i+2)%money.length];
+        if(temp3>Multitype){
+            Multitype=temp3;
+        }
+    }
+    System.out.println("The money robbed from the multitype building is:- "+Multitype);
+}
+    }
+
+public class lab4{
+    public static void main(String args[]){
+
+        JAVAProfessionalRobber obj1=new JAVAProfessionalRobber();
+        obj1.RobbingClass();
+        obj1.MachineLearning();
+        obj1.displaymoney();
+        obj1.RowHouses();
+        obj1.RoundHouses();
+        obj1.SqaureHouse();
+        obj1.MultiHouseBuilding();
+        
+    }
+}
