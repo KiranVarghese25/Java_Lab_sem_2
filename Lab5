@@ -1,1 +1,107 @@
 
+ interface BankInterface {
+    final int Bank_A=10000;
+    final int Bank_B=150000;
+    final int Bank_C=200000;
+    
+    abstract double getBalance();
+    abstract void getIntrestRate();   
+}
+
+class BankA implements BankInterface{
+    double balanceA;
+    double IRrateA;
+    double IRamtA;
+    
+    public void  getIntrestRate(){
+    IRrateA=0.07;   
+    System.out.println("The interest of this bank is:- "+IRrateA);
+    }
+
+    public double getBalance(){
+        IRamtA=IRrateA*Bank_A;
+        balanceA=Bank_A+IRamtA;
+        return balanceA;
+        
+    }
+
+    void displayinfo(){
+        System.out.println("The Total balance of the Bank A acc is :- "+getBalance());
+    }
+
+}
+
+
+class BankB implements BankInterface{
+    double balanceB;
+    double IRrateB;
+    double IRamtB;
+
+    public void  getIntrestRate(){
+    IRrateB=0.074;   
+    System.out.println("The interest of this bank is:- "+IRrateB);
+    }
+
+    public double getBalance(){
+        IRamtB=IRrateB*Bank_B;
+        balanceB=IRamtB+Bank_B;
+        return balanceB;
+        
+    }
+
+    void displayinfo(){
+        System.out.println("The Total balance of the Bank B acc is :- "+getBalance());
+    }
+
+}
+
+
+class BankC implements BankInterface{
+    double balanceC;
+    double IRrateC;
+    double IRamtC;
+    
+    public void  getIntrestRate(){
+    IRrateC=0.079;   
+    System.out.println("The interest of this bank is:- "+IRrateC);
+    }
+
+    public double getBalance(){
+        IRamtC=IRrateC*Bank_C;
+        balanceC=IRamtC+Bank_C;
+        return balanceC;
+        
+    }
+
+    void displayinfo(){
+        System.out.println("The Total balance of the Bank C acc is :- "+getBalance());
+    }
+
+}
+
+
+
+public class Lab5 {
+
+    public static void main(String[] args) {
+        System.out.println("Object Creation for the three classes: ---------");
+        BankA obj1 = new BankA();
+        BankB obj2 =new BankB();
+        BankC obj3 =new BankC();
+
+        System.out.println("Method calling for each of the objects--------");
+        obj1.getIntrestRate();
+        obj1.displayinfo();
+        System.out.println("---------------------------------------------------------");
+
+        obj2.getIntrestRate();
+        obj2.displayinfo();
+        System.out.println("--------------------------------------------------------");
+
+        obj3.getIntrestRate();
+        obj3.displayinfo();
+        obj3.getBalance();
+    }
+    
+}
+
