@@ -105,3 +105,99 @@ public class Lab5 {
     
 }
 
+
+
+//Lab 5 part 2
+import java.util.Scanner;
+
+//creating our interface that hold two abstract methods 
+ interface WaterConservationSystem {
+   abstract double  calculatedTrappedWater();
+   abstract int[] IndividualVolofBlocks();
+
+
+    
+}
+
+//abstract class that implements our interface and also  has an abstract methods
+abstract class RainySeasonConservation implements WaterConservationSystem {
+abstract void nosofblocks();
+}
+
+//child class that inherits from abstarct class
+class CityBlockConservation extends RainySeasonConservation{
+    //variables that will used for calculation as well as storing values
+    int width=1;
+    int nos_blocks;
+    int[] blockheights;
+    int blockwidth;
+    int vol;
+    int dummyvar;
+    int[] indVol;
+    int totalvol;
+
+    //this method has been used to read info from user 
+    public void nosofblocks(){
+        Scanner readinp =new Scanner(System.in);
+        System.out.println("Enter the nos of blocks you want to calculate the volume for :  ");
+        nos_blocks=readinp.nextInt();
+
+        blockheights=new int[nos_blocks];
+        System.out.println("Enter the height for each block:- ");
+        for(int i=0;i<blockheights.length;i++){
+            blockheights[i]=readinp.nextInt();
+        }
+
+
+    }
+
+    //Calulating individual vol for each block and then storing in new array 
+    public int[] IndividualVolofBlocks(){
+        indVol= new int[nos_blocks];
+        for(int i=0;i<blockheights.length;i++){
+            indVol[i]=(width*width)*blockheights[i];
+    }
+        return indVol;
+    }
+
+
+
+
+    //Calculating total sum by adding elements from array 
+    public double calculatedTrappedWater(){
+        totalvol=0;
+        for(int i=0;i<blockheights.length;i++){
+            totalvol=totalvol+indVol[i];
+        }
+        return totalvol;
+        
+    }
+
+    
+    //method used to just display info and results from previous methods
+    public void displayInfo(){
+        System.out.println("The width of each block is:- ");
+        System.out.println("The block Height are as Follows:- ");
+        for(int i=0;i<blockheights.length;i++){
+            System.out.println(blockheights[i]);
+        }
+        System.out.println("The tottal volume of all the blocks is :- "+calculatedTrappedWater());
+    }
+
+}
+    
+
+//main claa
+public class Lab5part2 {
+    public static void main(String[] args) {
+        //creation of objects
+        CityBlockConservation obj1= new CityBlockConservation();
+        //calling of methods 
+        obj1.nosofblocks();
+        obj1.IndividualVolofBlocks();
+        obj1.displayInfo();
+        
+    }
+
+    
+}
