@@ -188,7 +188,6 @@ public class OrderFulfillmentTest {
                 System.out.print("Enter item ID : ");
                 int itemId = scanner.nextInt();
 
-                // Consume the newline character
                 scanner.nextLine();
 
                 System.out.print("Enter item name : ");
@@ -197,24 +196,19 @@ public class OrderFulfillmentTest {
                 Item item = new Item(itemId, itemName);
                 items.add(item);
             }
-
             Order order = new Order(i, items);
             orderFulfillmentSystem.placeOrder(order);
         }
 
         orderFulfillmentSystem.startProcessing();
-
         System.out.println("Enter item ID to check  availability: ");
         int itemIdToCheck = scanner.nextInt();
         scanner.nextLine();
-
         System.out.print("Enter item name : ");
         String itemNameToCheck = scanner.nextLine();
-
         Item itemToCheck = new Item(itemIdToCheck, itemNameToCheck);
         System.out.println("Stock for item " + itemIdToCheck + ": " +
-                orderFulfillmentSystem.checkInventoryAvailability(itemToCheck));
-
+        orderFulfillmentSystem.checkInventoryAvailability(itemToCheck));
         System.out.println("Enter order ID to track status: ");
         int orderIdToTrack = scanner.nextInt();
         orderFulfillmentSystem.trackOrderStatus(orderIdToTrack);
