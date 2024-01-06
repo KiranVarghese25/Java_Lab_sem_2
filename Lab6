@@ -1,84 +1,61 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class Lab6 {
-    private int size;
-    private int[] coins;
-    private int sum;
-    private int temp;
 
-    public void ReadVal() {
-        Scanner readinp = new Scanner(System.in);
-        System.out.println("Enter the number of coins:- ");
-        size = readinp.nextInt();
-        coins = new int[size];
-        System.out.println("Enter the value of the coins:- ");
-        for (int i = 0; i < size; i++) {
-            coins[i] = readinp.nextInt();
+    public static void main(String[] args) throws InterruptedException {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter the size of Array : ");
+        int n = input.nextInt();
+        int[] coinsArr = new int[n];
+
+        System.out.println("Enter the sum value : ");
+        int sum = input.nextInt();
+        Thread t1 = new Thread(() -> {
+
+            synchronized (coinsArr) {
+
+                System.out.print("Enter the coins value: ");
+                for (int i = 0; i < n; i++) {
+                    coinsArr[i] = input.nextInt();
+                }
+
+            }
+        });
+        List<List<Integer>> v = new ArrayList<>();
+        Thread t2 = new Thread(() -> {
+            synchronized (coinsArr) {
+                combiFunction(coinsArr, sum, 0, new ArrayList<>(), v);
+            }
+        });
+
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+        for (List<Integer> combination : v) {
+            System.out.println(combination);
         }
-        System.out.println("The value of the coin array is as follows:- ");
-        System.out.println(Arrays.toString(coins));
+
     }
 
-    public void CombinationFinder() {
-        Scanner readinp2 = new Scanner(System.in);
-        System.out.println("Enter the sum:- ");
-        sum = readinp2.nextInt();
-        System.out.println("The Sum is:- " + sum);
-        countCombinations(0, sum);
-        System.out.println("The total number of combinations is: " + temp);
-    }
+    static void combiFunction(int[] array, int target, int start, List<Integer> current,
+            List<List<Integer>> result) {
+        if (target == 0) {
 
-    public void countCombinations(int index, int remainingSum) {
-        if (remainingSum == 0) {
-            temp++;
+            result.add(new ArrayList<>(current));
             return;
         }
-        for (int i = index; i < size; i++) {
-            if (coins[i] <= remainingSum) {
-                countCombinations(i, remainingSum - coins[i]);
+
+        for (int i = start; i < array.length; i++) {
+
+            if (array[i] <= target) {
+                current.add(array[i]);
+                combiFunction(array, target - array[i], i, current, result);
+                current.remove(current.size() - 1);
             }
         }
     }
 
-    public static void main(String[] args) {
-        Lab6 lab = new Lab6();
-        ReadThread readThread = new ReadThread(lab);
-        CombinationThread combinationThread = new CombinationThread(lab);
-
-        readThread.start();
-        try {
-            readThread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        combinationThread.start();
-    }
-}
-
-class ReadThread extends Thread {
-    private Lab6 lab;
-    public ReadThread(Lab6 lab) {
-        this.lab = lab;
-    }
-
-    public void run() {
-        lab.ReadVal();
-        System.out.println("ReadThread is running-----");
-    }
-}
-
-class CombinationThread extends Thread {
-    private Lab6 lab;
-
-    public CombinationThread(Lab6 lab) {
-        this.lab = lab;
-    }
-
-    public void run() {
-        lab.CombinationFinder();
-        System.out.println("CombinationThread is running-----");
-    }
 }
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //part 2
