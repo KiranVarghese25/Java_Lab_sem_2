@@ -3,8 +3,8 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 class Customer {
-private String customerId;
-private String name;
+public String customerId;
+public String name;
 public Customer(String customerId, String name) {
     this.customerId = customerId;
     this.name = name;
@@ -19,8 +19,8 @@ public Customer(String customerId, String name) {
 
 
 class Product {
-    private String productId;
-    private String name;
+    public String productId;
+    public String name;
 
     public Product(String productId, String name) {
         this.productId = productId;
@@ -36,9 +36,9 @@ class Product {
 
 
 class Order {
-    private String orderId;
-    private Customer customer;
-    private ArrayList<Product> products;
+    public  String orderId;
+    public Customer customer;
+    public ArrayList<Product> products;
     public Order(String orderId, Customer customer, ArrayList<Product> products) {
         this.orderId = orderId;
         this.customer = customer;
@@ -72,51 +72,33 @@ public class main {
     public void displayMenu() {
         System.out.println("Menu:");
         System.out.println("1. Add User");
-        System.out.println("2. Update User details");
-        System.out.println("3. Add Prod");
-        System.out.println("4. Update Prod");
-        System.out.println("5. Track Order");
-        System.out.println("6. View Order History");
-        System.out.println("0. Exit");
+        System.out.println("2. Add Prod");
+        System.out.println("3. Exit");
         System.out.print("Enter your choice: ");
     }
     public void performOperation(int choice) {
+        String userId;
+        String prodId;
         Scanner scanner = new Scanner(System.in);
         switch (choice) {
             case 1:
                 System.out.print("Enter user ID: ");
-                String userId = scanner.nextLine();
+                 userId = scanner.nextLine();
                 System.out.print("Enter user name: ");
                 String userName = scanner.nextLine();
                 addCustomer(new Customer(userId, userName));
                 System.out.println("User added successfully!");
                 break;
             case 2:
-                System.out.print("Enter user ID to update: ");
-                String userId = scanner.nextLine();
-                System.out.print("Enter user name: ");
-                String userName = scanner.nextLine();
-                addCustomer(new Customer(userId, userName));
-                System.out.println("User added successfully!");
-                break;
-            case 3:
+
                 System.out.print("Enter product ID: ");
-                String prodId = scanner.nextLine();
+                prodId = scanner.nextLine();
                 System.out.print("Enter product name: ");
                 String prodName = scanner.nextLine();
                 addProduct(new Product(prodId, prodName));
                 System.out.println("Product added successfully!");
                 break;
-            case 4:
-               break;
-               
-            case 5:
-                break;
-               
-            case 6:
-               break;
-                
-            case 0:
+            case 3:              
                 System.out.println("Exiting program. Goodbye!");
                 System.exit(0);
                 break;
@@ -126,7 +108,7 @@ public class main {
     }
 
     public static void main(String[] args) {
-        main onj1 = new main();
+        main obj1 = new main();
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
